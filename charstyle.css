@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+body {
+  font-family: "Quicksand";
+
+}
+
+:root{
+    /*Abstar*/
+    --char1-transform: translate(-100%,-5%) scale(1.5);
+    --char1-filter: blur(30px); /*30px*/
+    --char1-zIndex: 11;
+    --char1-opacity: 0;
+    /*Jeff*/
+    --char2-transform: translateX(0,0);
+    --char2-filter: blur(0);
+    --char2-zIndex: 10;
+    --char2-opacity: 1;
+    /*Bluie*/
+    --char3-transform: translate(50%,0%) scale(0.8);
+    --char3-filter: blur(10px); /*10px*/
+    --char3-zIndex: 9;
+    --char3-opacity: 1;
+    /*Milli*/
+    --char4-transform: translate(90%,0%) scale(0.6);
+    --char4-filter: blur(20px); /*30px*/
+    --char4-zIndex: 8;
+    --char4-opacity: 1;
+    /*Lexi*/
+    --char5-transform: translate(120%,0%) scale(0.4);
+    --char5-filter: blur(30px); /*30px*/
+    --char5-zIndex: 7;
+    --char5-opacity: 0;
+}
+
+a{
+    /*text-decoration: none;*/
+    color: #3f0b67;
+}
+
+header{
+    width:1140px;
+    max-width: 90%;
+    margin: auto;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-weight: bold;
+}
+header nav a{
+    margin-left: 30px;
+}
+.arrows #left,
+.arrows #right{
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+}
+
+.arrows #back{
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/*Content*/
+/*NOTE : to set the height, adjust the "top" values*/
+.content{
+    margin-top:-15px; /*-50px(The Main Criminal that steals my Home*/  /*test:-15px*/
+    height: 800px; /*800px*/  /*test: 750px*/
+    overflow:hidden;
+    position: relative;
+    z-index: 0; /* -1 Efficient FIX but sacrifices 'more info' button*/
+}
+
+.content .list{
+    position: absolute;
+    top: -15px; /*0px if changes margin-top:-15px*/
+    width: 1140px;
+    max-width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 80%;
+}
+
+.content .list .character{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:70%;
+    height: 100%;
+    font-size: 15px;
+}
+
+.content .list .character img{
+    width: 50%; /*img size*/
+    position: absolute;
+    right:0;
+    top:65%;
+    transform: translateY(-50%);
+
+    
+}
+
+.content .list .character .detailed{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.content .list .character .intro{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.content .list .character:nth-child(2) .intro{
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s;
+
+}
+
+.content .list .character:nth-child(n+5){
+    opacity: 0;
+    pointer-events: none;
+}
+/*The Main Front PAge*/
+.content .list .character:nth-child(2){
+    transform: var(--char2-transform);
+    filter: var(--char2-filter);
+    z-index: var(--char2-zIndex);
+    opacity: var(--char2-opacity);
+}
+/*front item will blur*/
+.content .list .character:nth-child(1){
+    transform: var(--char1-transform);
+    filter: var(--char1-filter);
+    z-index: var(--char1-zIndex);
+    opacity: var(--char1-opacity);
+    pointer-events: none;
+}
+/*From here its all back*/
+.content .list .character:nth-child(3){
+    transform: var(--char3-transform);
+    filter: var(--char3-filter);
+    z-index: var(--char3-zIndex);
+    opacity: var(--char3-opacity);
+}
+
+.content .list .character:nth-child(4){
+    transform: var(--char4-transform);
+    filter: var(--char4-filter);
+    z-index: var(--char4-zIndex);
+    opacity: var(--char4-opacity);
+}
+
+.content .list .character:nth-child(5){
+    transform: var(--char5-transform);
+    filter: var(--char5-filter);
+    z-index: var(--char5-zIndex);
+    opacity: var(--char5-opacity);
+}
+
+.arrows{
+    position: absolute;
+    bottom: 50px;
+    width: 1140px;
+    max-width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .list .character .intro .title{
+    font-size:4em;
+}
+.content .list .character .intro .desc{
+    font-size: 1em;
+}
+.content .list .character .intro .moreinfo{
+    margin-top: 1.2em;
+}
+
+.content .list .character:nth-child(2) .intro .title,
+.content .list .character:nth-child(2) .intro .desc,
+.content .list .character:nth-child(2) .intro .moreinfo{
+    opacity: 0;
+    animation: showContent 0.5s 0.2s ease-in-out 1 forwards;
+
+}
+@keyframes showContent
+ {
+    from{
+        transform: translateY(50px);
+        filter: blur(30px);
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/*transition animation right*/
+.content.next .list .character:nth-child(1){
+    animation: positionChar2 0.5s ease-in-out 1 forwards;
+}
+@keyframes positionChar2 {
+    from{
+        transform: var(--char2-transform);
+        filter: var(--char2-filter);
+        z-index: var(--char2-zIndex);
+        opacity: var(--char2-opacity);
+    }
+}
+
+.content.next .list .character:nth-child(2){
+    animation: positionChar3 0.7s ease-in-out forwards;
+}
+@keyframes positionChar3{
+    from{
+        transform: var(--char3-transform);
+        filter: var(--char3-filter);
+        z-index: var(--char3-zIndex);
+        opacity: var(--char3-opacity);
+    }
+}
+
+.content.next .list .character:nth-child(3){
+    animation: positionChar4 0.9s ease-in-out forwards;
+}
+@keyframes positionChar4{
+    from{
+        transform: var(--char4-transform);
+        filter: var(--char4-filter);
+        z-index: var(--char4-zIndex);
+        opacity: var(--char4-opacity);
+    }
+}
+
+.content.next .list .character:nth-child(4){
+    animation: positionChar5 1.1s ease-in-out forwards;
+}
+@keyframes positionChar5{
+    from{
+        transform: var(--char5-transform);
+        filter: var(--char5-filter);
+        z-index: var(--char5-zIndex);
+        opacity: var(--char5-opacity);
+    }
+}
+
+/*transition animation left*/
+.content.prev .list .character:nth-child(2){
+    animation: positionChar1 0.5s ease-in-out 1 forwards;
+}
+@keyframes positionChar1{
+    from{
+        transform: var(--char1-transform);
+        filter: var(--char1-filter);
+        z-index: var(--char1-zIndex);
+        opacity: var(--char1-opacity);
+    }
+}
+
+.content.prev .list .character:nth-child(3){
+    animation: positionChar2 0.7s ease-in-out 1 forwards;
+}
+
+.content.prev .list .character:nth-child(4){
+    animation: positionChar3 0.9s ease-in-out 1 forwards;
+}
+
+.content.prev .list .character:nth-child(5){
+    animation: positionChar4 1.1s ease-in-out 1 forwards;
+}
+
+
+/*detailed view*/
+
+.content .list .character{
+    transition: left 0.5s, opacity 0.5s;
+}
+
+.content.showDetail .list .character:nth-child(3),
+.content.showDetail .list .character:nth-child(4){
+    left: 100%;
+    opacity:0;
+    pointer-events: none;
+}
+.content.showDetail .list .character:nth-child(2){
+    width: 70%;
+}
+.content.showDetail .list .character:nth-child(2) .intro{
+    opacity: 0;
+    pointer-events: none;
+}
+.content .list .character:nth-child(2) img{
+    transition: right 0.5s;
+}
+.content.showDetail .list .character:nth-child(2) img{
+    right: 50%;
+}
+.content.showDetail .list .character:nth-child(2) .detailed{
+    opacity: 1;
+    pointer-events: auto; 
+    width: 50%;
+    position: absolute;
+    right: -35%;
+    text-align: right;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.content.showDetail .list .character .detailed .title{
+    font-size: 4em;
+}
+
+.content.showDetail .list .character:nth-child(2) .detailed .title,
+.content.showDetail .list .character:nth-child(2) .detailed .desc,
+.content.showDetail .list .character:nth-child(2) .detailed button{
+    opacity: 0;
+    animation: showContent 0.5s 0.2s ease-in-out 1 forwards;
+}
+
+
+
+
+
